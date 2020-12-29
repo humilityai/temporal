@@ -1,4 +1,4 @@
-// Copyright 2020 Hummility AI Incorporated, All Rights Reserved.
+// Copyright 2020 Humility AI Incorporated, All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,6 +15,18 @@
 package temporal
 
 import "time"
+
+// HourStart will return the starting time of the day for the given time.Time object
+func HourStart(t time.Time) time.Time {
+	y, m, d := t.Date()
+	return time.Date(y, m, d, t.Hour(), 0, 0, 0, t.Location())
+}
+
+// HourFinish will return the final time of the day for the given time.Time object
+func HourFinish(t time.Time) time.Time {
+	y, m, d := t.Date()
+	return time.Date(y, m, d, t.Hour(), 59, 59, int(time.Second-time.Nanosecond), t.Location())
+}
 
 // DayStart will return the starting time of the day for the given time.Time object
 func DayStart(t time.Time) time.Time {
