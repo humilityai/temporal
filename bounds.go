@@ -16,13 +16,25 @@ package temporal
 
 import "time"
 
-// HourStart will return the starting time of the day for the given time.Time object
+// MinuteStart will return the starting time of the minute for the given time.Time object
+func MinuteStart(t time.Time) time.Time {
+	y, m, d := t.Date()
+	return time.Date(y, m, d, t.Hour(), t.Minute(), 0, 0, t.Location())
+}
+
+// MinuteFinish will return the final time of the minute for the given time.Time object
+func MinuteFinish(t time.Time) time.Time {
+	y, m, d := t.Date()
+	return time.Date(y, m, d, t.Hour(), t.Minute(), 59, int(time.Second-time.Nanosecond), t.Location())
+}
+
+// HourStart will return the starting time of the hour for the given time.Time object
 func HourStart(t time.Time) time.Time {
 	y, m, d := t.Date()
 	return time.Date(y, m, d, t.Hour(), 0, 0, 0, t.Location())
 }
 
-// HourFinish will return the final time of the day for the given time.Time object
+// HourFinish will return the final time of the hour for the given time.Time object
 func HourFinish(t time.Time) time.Time {
 	y, m, d := t.Date()
 	return time.Date(y, m, d, t.Hour(), 59, 59, int(time.Second-time.Nanosecond), t.Location())
